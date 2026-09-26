@@ -1,20 +1,31 @@
-from llm import llm
 from crewai import Agent
 
-researcher = Agent(
-     role="AI researcher",
-        goal=(
-            "Research Jev AI "
-            "and provide accurate information."
-        ),
-        backstory=(
-                "You are an AI researcher "
-                "specialized in Jev AI."
-            ),
-        llm = llm, 
-        verbose=True
-        
+from llm import llm
+
+from mcp_tools import (
+    mcp_current_time
 )
+
+
+
+researcher = Agent(
+    role="AI Researcher",
+    goal=(
+        "Research AI agent concepts "
+        "and provide accurate information."
+    ),
+    backstory=(
+        "You are an AI researcher "
+        "specialized in AI agents."
+    ),
+    llm=llm,
+	    tools=[
+        mcp_current_time
+    ],
+
+    verbose=True
+)
+
 
 coder = Agent(
     role="Python Developer",
@@ -31,6 +42,7 @@ coder = Agent(
     verbose=True
 )
 
+
 reviewer = Agent(
     role="Code Reviewer",
     goal=(
@@ -44,4 +56,5 @@ reviewer = Agent(
     llm=llm,
     verbose=True
 )
+
 
